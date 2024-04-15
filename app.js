@@ -1,3 +1,11 @@
+function limparCampos () {
+    document.getElementById('quantidade').value = '';
+    document.getElementById('de').value = '';
+    document.getElementById('ate').value = '';
+    document.getElementById('resultado').innerHTML = '<label class="texto__paragrafo">Números sorteados: nenhum até agora.</label>';
+}
+
+
 function sortear(){
     let quantidade = parseInt (document.getElementById('quantidade').value);
     let de = parseInt (document.getElementById('de').value);
@@ -11,6 +19,13 @@ function sortear(){
              numero = obterNumeroAleatorio (de, ate);
         }
         sorteados.push(numero);
+
+        if (quantidade >= ate - de || de >= ate) {
+            alert('Valores inválidos. Por favor, digite outros números.');
+            limparCampos();
+            return;
+        }
+    
     }
 
 
@@ -37,9 +52,6 @@ function alterarStatusBotao(){
 }
 
 function reiniciar() {
-    document.getElementById('quantidade').value = '';
-    document.getElementById('de').value = '';
-    document.getElementById('ate').value = '';
-    document.getElementById('resultado').innerHTML = '<label class="texto__paragrafo">Números sorteados: nenhum até agora</label>';
+    limparCampos();
     alterarStatusBotao();
 }
